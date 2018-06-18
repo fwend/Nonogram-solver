@@ -60,7 +60,7 @@ public class NonogramSolver {
             int sumChars = s.chars().map(c -> c - 'A' + 1).sum();
             List<String> prep = stream(s.split(""))
                     .map(x -> repeat(x.charAt(0) - 'A' + 1, "1"))
-					.collect(toList());
+                    .collect(toList());
 
             for (String r : genSequence(prep, len - sumChars + 1)) {
                 char[] bits = r.substring(1).toCharArray();
@@ -74,7 +74,7 @@ public class NonogramSolver {
         return result;
     }
 
-    // permutation generator, translated from Python via D
+    // permutation generator
     static List<String> genSequence(List<String> ones, int numZeros) {
         if (ones.isEmpty())
             return asList(repeat(numZeros, "0"));
@@ -104,11 +104,11 @@ public class NonogramSolver {
     static int reduceMutual(List<List<BitSet>> cols, List<List<BitSet>> rows) {
         int countRemoved1 = reduce(cols, rows);
         if (countRemoved1 == -1)
-			return -1;
+            return -1;
 
         int countRemoved2 = reduce(rows, cols);
         if (countRemoved2 == -1)
-			return -1;
+            return -1;
 
         return countRemoved1 + countRemoved2;
     }
@@ -118,7 +118,7 @@ public class NonogramSolver {
 
         for (int i = 0; i < a.size(); i++) {
 
-			BitSet commonOn = new BitSet();
+            BitSet commonOn = new BitSet();
             commonOn.set(0, b.size());
             BitSet commonOff = new BitSet();
 
@@ -130,7 +130,7 @@ public class NonogramSolver {
 
             // remove from bj all candidates that don't share the forced values
             for (int j = 0; j < b.size(); j++) {
-				final int fi = i, fj = j;
+                final int fi = i, fj = j;
 
                 if (b.get(j).removeIf(cnd -> (commonOn.get(fj) && !cnd.get(fi))
                         || (!commonOff.get(fj) && cnd.get(fi))))
